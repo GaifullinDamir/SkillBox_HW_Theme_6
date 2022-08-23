@@ -8,8 +8,7 @@ namespace SkillBox_HW_Theme_6.UI
 {
     internal class Input
     {
-        private const int _maxValue = 1_000_000_000;
-        private const int _minValue = 0;
+        
 
         public static int InputInteger()
         {
@@ -18,21 +17,9 @@ namespace SkillBox_HW_Theme_6.UI
             while(!stop)
             {
                 dataText = Console.ReadLine();
-                dataInt = Convert(dataText);
+                dataInt = Transform.StringToInt(dataText);
                 stop = dataInt == -1 ? false : true;
             }
-            return dataInt;
-        }
-
-        public static int Convert(string dataText)
-        {
-            int dataInt = -1;
-            try
-            {
-                dataInt = int.Parse(dataText);
-                if (dataInt <= _minValue || dataInt >= _maxValue){ return -1; }
-            }
-            catch (Exception exception) { Console.WriteLine(exception.Message); }
             return dataInt;
         }
 

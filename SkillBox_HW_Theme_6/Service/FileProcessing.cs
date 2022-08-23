@@ -26,5 +26,17 @@ namespace SkillBox_HW_Theme_6.Service
             }
             return dataText;
         }
+
+        //public bool WriteFileData(string path)
+        //{
+        //    try
+        //    {
+
+        //    }
+        //    catch(Exception exception)
+        //    {
+        //        Console.WriteLine(exception.Message);
+        //    }
+        //}
     }
 }
