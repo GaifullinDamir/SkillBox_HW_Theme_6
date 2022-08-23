@@ -13,27 +13,38 @@ namespace SkillBox_HW_Theme_6.UI
 
         public static int InputInteger()
         {
-            string input; bool stop = false;
-            int integer = -1;
-            while (!stop)
+            string dataText; bool stop = false;
+            int dataInt = -1;
+            while(!stop)
             {
-                try
-                {
-                    input = Console.ReadLine();
-                    integer = int.Parse(input);
-                    if(integer >= _minValue && integer <= _maxValue)
-                    {
-                        stop = true;
-                    }
-                    else Console.WriteLine("Число не попадает в границы.");
-                    
-                }
-                catch (Exception)
-                {
-                    Console.Write("Введите целое число: ");
-                }
+                dataText = Console.ReadLine();
+                dataInt = Convert(dataText);
+                stop = dataInt == -1 ? false : true;
             }
-            return integer;
+            return dataInt;
+        }
+
+        public static int Convert(string dataText)
+        {
+            int dataInt = -1;
+            try
+            {
+                dataInt = int.Parse(dataText);
+                if (dataInt <= _minValue || dataInt >= _maxValue){ return -1; }
+            }
+            catch (Exception exception) { Console.WriteLine(exception.Message); }
+            return dataInt;
+        }
+
+        public static bool Change()
+        {
+            Console.WriteLine("Введите: y(да) или n(нет)"); string dataText = String.Empty;
+            while (dataText != "y" && dataText != "n")
+            {
+                Console.WriteLine("y или n");
+                dataText = Console.ReadLine();
+            }
+            return dataText == "y" ? true : false;
         }
     }
 }
