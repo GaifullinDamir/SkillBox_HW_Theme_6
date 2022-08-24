@@ -23,7 +23,7 @@ namespace SkillBox_HW_Theme_6.Handling
 
         public static string JaggedArrayToString(int[][] array)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder(); //А ты где-то этот объект используешь? Зачем он тут?
             string result = string.Empty;
             int groupCounter = 1;
             foreach (var group in array)
@@ -31,7 +31,7 @@ namespace SkillBox_HW_Theme_6.Handling
                 result += $"\nГруппа {groupCounter}: ";
                 foreach (var number in group)
                 {
-                    result += $"{number} ";
+                    result += $"{number} "; //Дописывать что-то в конец строки - медленная операция! Ты правильно думал, надо использовать объект StringBuilder
                 }
                 result += "\n";
                 groupCounter++;

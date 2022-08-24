@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace SkillBox_HW_Theme_6.Handling
 {
-    internal class Calculate
+    internal class Calculate //Не очень удачное название класса
     {
+        //А если сделать так: public static int _MaxValue => 1_000_000_000 ?
+        //Если 1_000_000_000 и 0 это у тебя каике-то константы, то стоит их вынести в отдельный класс(констант) или в настройки
         public static int _MaxValue { get { return 1_000_000_000; } }
         public static int _MinValue { get { return 0; } }
         public static int _N { get; set; }
