@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; //Почистить лишние пространства имен
 using SkillBox_HW_Theme_6.Service;
 
 namespace SkillBox_HW_Theme_6.UI
 {
-    internal class Input
+    internal class Input //Давай сделаем public, может я захочу этот класс в другом проекте использовать
     {
+        //Метод назван Path? Метод - это действие, должен быть глагол. В других местах также
         public static void Path()
         {
             Console.Write("Введите адрес файла:");

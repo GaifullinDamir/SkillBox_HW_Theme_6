@@ -5,14 +5,16 @@ using System.IO.Compression;
 
 namespace SkillBox_HW_Theme_6.Service
 {
-    internal class FileProcessing
+    //Этот класс по логике не должен быть в папке Services, так как там находится бизнес-логика приложения.
+    //Необходима дополнительная папка(Infrastructure), где будут лежать классы для обращения с БД, файлами и т.д.
+    internal class FileProcessing 
     {
         private static string _path;
         
         public static void SetPath(string path) { _path = path; }
         public string ReadFileData()
         {
-            string dataText = String.Empty;
+            string dataText = String.Empty; //Давай будем следовать советам компилятора и напишем string.Empty
             try
             {
                 using (FileStream fs = File.OpenRead(@_path))
@@ -45,6 +47,7 @@ namespace SkillBox_HW_Theme_6.Service
             }
         }
 
+        //А зачем нам параметр dataText, он же нигде не используется?
         public void CompessFile(string dataText)
         {
             using(FileStream fs = new FileStream(_path, FileMode.OpenOrCreate))

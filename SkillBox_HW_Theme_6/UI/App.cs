@@ -19,6 +19,11 @@ namespace SkillBox_HW_Theme_6.UI
         }        
         private int ReadFromFile()
         {
+            //Создавать класс внутри другого класса некорректно, так как ты явно связываешь два класса
+            //Рекумендуется создать интерфейс для работы с чтением/записью данных и реализовать этот интерфейс каким-нибудь классом
+            //А здесь использовать объект интерфейса(передавать в качестве параметра конструктора!), тогда твоему классу будет пофиг откуда ты работаешь с данными(из файла, из БД, API)
+            //Тем самым Мы делаем приложение слабосвязанным
+            //Читать про Dependency Injection
             FileProcessing fp = new FileProcessing();
             int dataInt = Transform.StringToInt(fp.ReadFileData());
             if(dataInt == -1)
@@ -31,7 +36,7 @@ namespace SkillBox_HW_Theme_6.UI
         private int[][] ComputeForCase()
         {
             int dataInt = ReadFromFile();
-            Calculate calculate = new Calculate(dataInt);
+            Calculate calculate = new Calculate(dataInt); //То же самое, что и выше
             return calculate.GroupOfIndivisibles(dataInt);
         }
         private void CaseShowGroupsCount()
