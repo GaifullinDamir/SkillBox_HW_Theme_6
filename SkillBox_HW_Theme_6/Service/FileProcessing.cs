@@ -8,12 +8,15 @@ namespace SkillBox_HW_Theme_6.Service
 {
     internal class FileProcessing
     {
-        public string ReadFileData(string path)
+        private static string _path;
+        
+        public static void SetPath(string path) { _path = path; }
+        public string ReadFileData()
         {
             string dataText = String.Empty;
             try
             {
-                using (FileStream fs = File.OpenRead(@path))
+                using (FileStream fs = File.OpenRead(@_path))
                 {
                     byte[] dataBytes = new byte[fs.Length]; //Создание массива типа байт для считывания данных
                     fs.Read(dataBytes, 0, dataBytes.Length); //Счит-е данных из файла в виде байт
@@ -27,16 +30,20 @@ namespace SkillBox_HW_Theme_6.Service
             return dataText;
         }
 
-        //public bool WriteFileData(string path)
-        //{
-        //    try
-        //    {
-
-        //    }
-        //    catch(Exception exception)
-        //    {
-        //        Console.WriteLine(exception.Message);
-        //    }
-        //}
+        public void WriteFileData(string dataText)
+        {
+            try
+            {
+                using(FileStream fs = new FileStream(@_path, FileMode.OpenOrCreate))
+                {
+                    byte[] dataBytes = System.Text.Encoding.Default.GetBytes(dataText);//Преобразование строки в байты
+                    fs.Write(dataBytes, 0, dataBytes.Length);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+        }
     }
 }

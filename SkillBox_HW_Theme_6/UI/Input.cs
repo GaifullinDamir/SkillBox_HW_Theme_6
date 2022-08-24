@@ -1,16 +1,27 @@
-﻿using System;
+﻿using SkillBox_HW_Theme_6.Handling;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SkillBox_HW_Theme_6.Service;
 
 namespace SkillBox_HW_Theme_6.UI
 {
     internal class Input
     {
-        
+        public static void Path()
+        {
+            Console.WriteLine("Показать пример ввода?");
+            if (Input.Change())
+            {
+                Console.WriteLine(@"C: \Users\Damir\source\repos\SkillBox_HW_Theme_6\SkillBox_HW_Theme_6\In.txt");
+            }
+            Console.Write("Введите адрес файла:");
+            FileProcessing.SetPath(Console.ReadLine()); 
+        }
 
-        public static int InputInteger()
+        public static int Integer()
         {
             string dataText; bool stop = false;
             int dataInt = -1;

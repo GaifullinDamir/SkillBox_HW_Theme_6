@@ -3,44 +3,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SkillBox_HW_Theme_6.Handling;
 using SkillBox_HW_Theme_6.Service;
 
 namespace SkillBox_HW_Theme_6.UI
 {
     internal class UI
     {
-        private int _n;
-        private string _path;
+        private string _path = String.Empty;
 
-        public void ShowMainMenu()
+        private void ShowMainMenu()
         {
             Console.WriteLine(
-                "1. Показать количество групп"
-               +"2. Записать группы в файл");
-        }
-        public void InputPath()
-        {
-            Console.WriteLine("Показать пример ввода?");
-            if (Input.Change())
-            {
-                Console.WriteLine(@"C: \Users\Damir\source\repos\SkillBox_HW_Theme_6\SkillBox_HW_Theme_6\In.xlsx");
-            }
-            Console.Write("Введите адрес файла:");
-            _path = Console.ReadLine();
+                "0.Меню" 
+               +"1. Показать количество групп"
+               +"2. Записать группы в файл"
+               +"3. Завершить работу");
         }
         
-        public void Read()
+        
+        private int ReadFromFile()
         {
-            FileProcessing fileProcessing = new FileProcessing();
-            int dataInt = Transform.StringToInt(fileProcessing.ReadFileData(_path));
+            FileProcessing fp = new FileProcessing();
+            int dataInt = Transform.StringToInt(fp.ReadFileData());
             if(dataInt == -1)
             {
                 Console.WriteLine("В файле находится неверное значение.");
-                return;
+                return -1;
             }
-            Console.WriteLine($"{dataInt}");
+            return dataInt;
+        }
+        private int[][] ComputeForCase()
+        {
+            int dataInt = ReadFromFile();
+            Calculate calculate = new Calculate(dataInt);
+            return calculate.GroupOfIndivisibles(dataInt);
+        }
+        private void CaseShowGroupsCount()
+        {
+            Console.WriteLine($"Количество групп: {ComputeForCase().Length}");
+        }
+        private void CaseWriteToFile()
+        {
+            FileProcessing fp = new FileProcessing();
+            string result = Transform.JaggedArrayToString(ComputeForCase());
+            fp.WriteFileData(result);
+        }
 
-
+        public void AppCycle()
+        {
+            Input.Path();
+            ShowMainMenu();
+            bool stop = false;
+            while(!stop)
+            {
+                switch (Input.Integer())
+                {
+                    case 0:
+                        ShowMainMenu(); break;
+                    case 1:
+                        CaseShowGroupsCount(); break;
+                    case 2:
+                        CaseWriteToFile(); break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

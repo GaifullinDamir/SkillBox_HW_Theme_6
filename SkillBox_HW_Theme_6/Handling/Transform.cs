@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SkillBox_HW_Theme_6.Service;
 
-namespace SkillBox_HW_Theme_6.UI
+namespace SkillBox_HW_Theme_6.Handling
 {
     internal class Transform
     {
@@ -21,7 +21,7 @@ namespace SkillBox_HW_Theme_6.UI
             return dataInt;
         }
 
-        public static void JaggedArrayToString(int[][] array)
+        public static string JaggedArrayToString(int[][] array)
         {
             StringBuilder stringBuilder = new StringBuilder();
             string result = string.Empty;
@@ -36,7 +36,7 @@ namespace SkillBox_HW_Theme_6.UI
                 result += "\n";
                 groupCounter++;
             }
-            Console.WriteLine(result);
+            return result;
         }
     }
 }
