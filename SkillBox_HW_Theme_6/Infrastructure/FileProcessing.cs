@@ -3,16 +3,16 @@ using System.IO;
 using System.IO.Compression;
 
 
-namespace SkillBox_HW_Theme_6.Service
+namespace SkillBox_HW_Theme_6.Infrastructure
 {
     internal class FileProcessing
     {
-        private static string _path;
-        
+        private static string _path = String.Empty;
+
         public static void SetPath(string path) { _path = path; }
         public string ReadFileData()
         {
-            string dataText = String.Empty;
+            string dataText = string.Empty;
             try
             {
                 using (FileStream fs = File.OpenRead(@_path))
@@ -22,18 +22,18 @@ namespace SkillBox_HW_Theme_6.Service
                     dataText = System.Text.Encoding.Default.GetString(dataBytes);//Декодинг байт в строку
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
             }
             return dataText;
         }
 
-        public void WriteFileData(string dataText)
+        public void WriteFileData(string dataText)//Используется на строке 38
         {
             try
             {
-                using(FileStream fs = new FileStream(@_path, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(@_path, FileMode.OpenOrCreate))
                 {
                     byte[] dataBytes = System.Text.Encoding.Default.GetBytes(dataText);//Преобразование строки в байты
                     fs.Write(dataBytes, 0, dataBytes.Length);
@@ -47,11 +47,11 @@ namespace SkillBox_HW_Theme_6.Service
 
         public void CompessFile(string dataText)
         {
-            using(FileStream fs = new FileStream(_path, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(_path, FileMode.OpenOrCreate))
             {
-                using(FileStream ts = File.Create("out_compressed.zip"))
+                using (FileStream ts = File.Create("out_compressed.zip"))
                 {
-                    using(GZipStream gzs = new GZipStream(ts, CompressionMode.Compress))
+                    using (GZipStream gzs = new GZipStream(ts, CompressionMode.Compress))
                     {
                         fs.CopyTo(gzs);
                     }

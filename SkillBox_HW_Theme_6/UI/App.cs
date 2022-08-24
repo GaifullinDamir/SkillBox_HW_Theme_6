@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using SkillBox_HW_Theme_6.Handling;
-using SkillBox_HW_Theme_6.Service;
+using SkillBox_HW_Theme_6.Infrastructure;
 
 namespace SkillBox_HW_Theme_6.UI
 {
@@ -31,12 +31,12 @@ namespace SkillBox_HW_Theme_6.UI
         private int[][] ComputeForCase()
         {
             int dataInt = ReadFromFile();
-            Calculate calculate = new Calculate(dataInt);
+            Computing calculate = new Computing(dataInt);
             return calculate.GroupOfIndivisibles(dataInt);
         }
         private void CaseShowGroupsCount()
         {
-            Input.Path();
+            Input.InputPath();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             Console.WriteLine($"Количество групп: {ComputeForCase().Length}");
@@ -46,21 +46,21 @@ namespace SkillBox_HW_Theme_6.UI
         private void CaseWriteToFile()
         {
             Console.WriteLine("Адрес для получения данных");
-            Input.Path();
+            Input.InputPath();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             FileProcessing fp = new FileProcessing();
             string result = Transform.JaggedArrayToString(ComputeForCase());
             Console.WriteLine("Адрес для выгрузки данных");
-            Input.Path();
+            Input.InputPath();
             fp.WriteFileData(result);
             stopwatch.Stop();
             Console.WriteLine($"Время затраченное на выполнение: {stopwatch.Elapsed}");
             Console.WriteLine("Зархивировать данные?");
-            if(Input.Change())
+            if(Input.InputChange())
             {
                 Console.WriteLine("Адрес файла который нунжо заархивировать");
-                Input.Path();
+                Input.InputPath();
                 fp.CompessFile(result);
             }
         }
@@ -71,7 +71,7 @@ namespace SkillBox_HW_Theme_6.UI
             bool stop = false;
             while(!stop)
             {
-                switch (Input.Integer())
+                switch (Input.InputInteger())
                 {
                     case 1:
                         CaseShowGroupsCount(); break;

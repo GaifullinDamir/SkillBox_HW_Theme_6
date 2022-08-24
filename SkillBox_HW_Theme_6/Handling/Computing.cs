@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace SkillBox_HW_Theme_6.Handling
 {
-    internal class Calculate
+    internal class Computing
     {
-        public static int _MaxValue { get { return 1_000_000_000; } }
-        public static int _MinValue { get { return 0; } }
         public static int _N { get; set; }
         public int _M { get; set; }
         private int[] _numbers;
         private int[][] _groups;
 
-        public Calculate(int n)
+        public Computing(int n)
         {
             _N = n;
             _groups = new int[1][];

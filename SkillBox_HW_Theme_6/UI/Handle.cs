@@ -4,19 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SkillBox_HW_Theme_6.Service;
+using SkillBox_HW_Theme_6.Infrastructure;
 
 namespace SkillBox_HW_Theme_6.UI
 {
-    internal class Input
+    public class Input
     {
-        public static void Path()
+        public static void InputPath()
         {
             Console.Write("Введите адрес файла:");
             FileProcessing.SetPath(Console.ReadLine()); 
         }
 
-        public static int Integer()
+        public static int InputInteger()
         {
             string dataText; bool stop = false;
             int dataInt = -1;
@@ -29,7 +29,7 @@ namespace SkillBox_HW_Theme_6.UI
             return dataInt;
         }
 
-        public static bool Change()
+        public static bool InputChange()
         {
             Console.WriteLine("Введите: y(да) или n(нет)"); string dataText = String.Empty;
             while (dataText != "y" && dataText != "n")
