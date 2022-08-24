@@ -12,11 +12,6 @@ namespace SkillBox_HW_Theme_6.UI
     {
         public static void Path()
         {
-            Console.WriteLine("Показать пример ввода?");
-            if (Input.Change())
-            {
-                Console.WriteLine(@"C: \Users\Damir\source\repos\SkillBox_HW_Theme_6\SkillBox_HW_Theme_6\In.txt");
-            }
             Console.Write("Введите адрес файла:");
             FileProcessing.SetPath(Console.ReadLine()); 
         }

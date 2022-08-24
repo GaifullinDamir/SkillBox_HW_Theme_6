@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.IO.Compression;
+
 
 namespace SkillBox_HW_Theme_6.Service
 {
@@ -43,6 +42,20 @@ namespace SkillBox_HW_Theme_6.Service
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
+            }
+        }
+
+        public void CompessFile(string dataText)
+        {
+            using(FileStream fs = new FileStream(_path, FileMode.OpenOrCreate))
+            {
+                using(FileStream ts = File.Create("out_compressed.zip"))
+                {
+                    using(GZipStream gzs = new GZipStream(ts, CompressionMode.Compress))
+                    {
+                        fs.CopyTo(gzs);
+                    }
+                }
             }
         }
     }

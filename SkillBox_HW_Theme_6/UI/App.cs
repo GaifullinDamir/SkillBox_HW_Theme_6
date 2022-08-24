@@ -1,27 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using SkillBox_HW_Theme_6.Handling;
 using SkillBox_HW_Theme_6.Service;
 
 namespace SkillBox_HW_Theme_6.UI
 {
-    internal class UI
+    internal class App
     {
         private string _path = String.Empty;
 
         private void ShowMainMenu()
         {
             Console.WriteLine(
-                "0.Меню" 
-               +"1. Показать количество групп"
-               +"2. Записать группы в файл"
-               +"3. Завершить работу");
-        }
-        
-        
+                "0.Меню\n" 
+               +"1. Показать количество групп\n"
+               +"2. Записать группы в файл\n"
+               +"3. Завершить работу\n");
+        }        
         private int ReadFromFile()
         {
             FileProcessing fp = new FileProcessing();
@@ -41,32 +36,51 @@ namespace SkillBox_HW_Theme_6.UI
         }
         private void CaseShowGroupsCount()
         {
+            Input.Path();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             Console.WriteLine($"Количество групп: {ComputeForCase().Length}");
+            stopwatch.Stop();
+            Console.WriteLine($"Время затраченное на выполнение: {stopwatch.Elapsed}");
         }
         private void CaseWriteToFile()
         {
+            Console.WriteLine("Адрес для получения данных");
+            Input.Path();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             FileProcessing fp = new FileProcessing();
             string result = Transform.JaggedArrayToString(ComputeForCase());
+            Console.WriteLine("Адрес для выгрузки данных");
+            Input.Path();
             fp.WriteFileData(result);
+            stopwatch.Stop();
+            Console.WriteLine($"Время затраченное на выполнение: {stopwatch.Elapsed}");
+            Console.WriteLine("Зархивировать данные?");
+            if(Input.Change())
+            {
+                Console.WriteLine("Адрес файла который нунжо заархивировать");
+                Input.Path();
+                fp.CompessFile(result);
+            }
         }
 
         public void AppCycle()
         {
-            Input.Path();
             ShowMainMenu();
             bool stop = false;
             while(!stop)
             {
                 switch (Input.Integer())
                 {
-                    case 0:
-                        ShowMainMenu(); break;
                     case 1:
                         CaseShowGroupsCount(); break;
                     case 2:
                         CaseWriteToFile(); break;
+                    case 3:
+                        stop = true; break;
                     default:
-                        break;
+                        Console.WriteLine("Такого пункта меню нет."); break;
                 }
             }
         }

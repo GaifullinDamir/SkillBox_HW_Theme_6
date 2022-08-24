@@ -11,7 +11,7 @@ namespace SkillBox_HW_Theme_6.Handling
         public static int _MaxValue { get { return 1_000_000_000; } }
         public static int _MinValue { get { return 0; } }
         public static int _N { get; set; }
-        public static int _M { get; set; }
+        public int _M { get; set; }
         private int[] _numbers;
         private int[][] _groups;
 
